@@ -1,0 +1,17 @@
+#searchbar {
+  margin-top: 10rem;
+  text-align: center;
+}
+
+input {
+  width: 33%;
+  height: 2rem;
+}
+
+button {
+  height: 2.35rem;
+}
+
+input[type="text"] {
+    font-size:18px;
+}

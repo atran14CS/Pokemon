@@ -1,0 +1,40 @@
+#card {
+    background-image: url('../photos/pokemonBackground.avif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    height: 20rem;
+    width: 15rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 16px; /* Adds space between cards */
+}
+
+.pokemonSprite {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+    position: absolute;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    font-size: 2rem;
+    text-align: center;
+    font-family: "Bebas Neue", sans-serif;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 0.5rem 0;
+    box-sizing: border-box;
+}
