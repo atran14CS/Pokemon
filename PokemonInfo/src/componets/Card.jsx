@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const Card = ({ pokemonName, sprite }) => {
   const [hovered, setHovered] = useState(false);
-
+  console.log(pokemonName);
   return (
     <div
       id="card"
@@ -15,9 +15,7 @@ const Card = ({ pokemonName, sprite }) => {
         alt={pokemonName}
         className="pokemonSprite"
       />
-      <h1 id="pokemonName" className={hovered ? 'show' : 'hide'}>
-        {pokemonName}
-      </h1>
+      <h1 id="pokemonName" className={hovered ? 'show' : 'hide'}>{pokemonName}</h1>
     </div>
   );
 };
