@@ -1,21 +1,21 @@
 import './Card.css';
 import { useState } from 'react';
 
-const Card = ({ pokemonName, sprite }) => {
+const Card = ({ name, sprite, number }) => {
   const [hovered, setHovered] = useState(false);
-  console.log(pokemonName);
   return (
     <div
       id="card"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
+      <h4>{number}</h4>
       <img
         src={sprite}
-        alt={pokemonName}
+        alt={name}
         className="pokemonSprite"
       />
-      <h1 id="pokemonName" className={hovered ? 'show' : 'hide'}>{pokemonName}</h1>
+      <h1 id={name} className={hovered ? 'show' : 'hide'}>{name}</h1>
     </div>
   );
 };

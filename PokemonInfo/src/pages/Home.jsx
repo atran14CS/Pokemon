@@ -1,15 +1,13 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from '../componets/Navbar';
 import Searchbar from '../componets/Searchbar';
 import Card from '../componets/Card';
 import './home.css';
 
 const Home = () => {
-  const offsetArr = [0, 151, 251, 386];
-  const limitArr = [151, 100, 135, 107];
+  const offsetArr = [0, 151, 251, 386]; // Offsets for different generations
+  const limitArr = [151, 100, 135, 107]; // Limits for different generations
 
-  const [offset, setOffset] = useState(offsetArr[0]);
-  const [limit, setLimit] = useState(limitArr[0]);
   const [pokemon, setPokemon] = useState([]);
 
   // Function to make API get requests
@@ -32,14 +30,13 @@ const Home = () => {
   };
 
   // Fetch Pokémon list based on generation
-  const getByGens = async () => {
+  const getByGens = async (limit, offset) => {
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
     const pokemonResults = await getRequest(url);
     if (pokemonResults && pokemonResults.results) {
       const getSpriteName = await getCover(pokemonResults.results);
-      setPokemon(getSpriteName);
+      return getSpriteName;
     }
-    console.log(pokemon);
   };
 
   // Fetch details for each Pokémon (sprite and name)
@@ -48,6 +45,7 @@ const Home = () => {
       const details = await getRequest(pokemon.url);
       if (details && details.sprites) {
         return {
+          number: details.id,
           name: details.name,
           sprite: details.sprites.other['official-artwork'].front_default,
         };
@@ -63,10 +61,23 @@ const Home = () => {
     return results.filter(pokemon => pokemon !== null);
   };
 
-  // useEffect to trigger the API call when component mounts
+  // Loop through all generations and fetch Pokémon data for each
+  const fetchAllGenerations = async () => {
+    let allPokemon = [];
+    for (let i = 0; i < offsetArr.length; i++) {
+      const generationPokemon = await getByGens(limitArr[i], offsetArr[i]);
+      if (generationPokemon) {
+        allPokemon = [...allPokemon, ...generationPokemon];
+      }
+    }
+    setPokemon(allPokemon);
+  };
+
   useEffect(() => {
-    getByGens();
-  }, [offset, limit]);
+    fetchAllGenerations();
+  }, []);
+
+  console.log(pokemon);
 
   return (
     <div>
@@ -74,7 +85,7 @@ const Home = () => {
       <Searchbar />
       <div className="pokemon-list">
         {pokemon.map((poke, index) => (
-          <Card key={index} name={poke.name} sprite={poke.sprite} />
+          <Card key={index} name={poke.name} sprite={poke.sprite} id={poke.number}/>
         ))}
       </div>
     </div>
