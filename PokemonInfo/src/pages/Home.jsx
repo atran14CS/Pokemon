@@ -5,8 +5,8 @@ import Card from '../componets/Card';
 import './home.css';
 
 const Home = () => {
-  const offsetArr = [0, 151, 251, 386]; // Offsets for different generations
-  const limitArr = [151, 100, 135, 107]; // Limits for different generations
+  const offsetArr = [0, 151, 251, 386, 493, 565, 651, 747, 867]; // Offsets for different generations
+  const limitArr = [151, 100, 135, 107, 156, 72, 86, 96, 120]; // Limits for different generations
 
   const [pokemon, setPokemon] = useState([]);
 
@@ -76,8 +76,6 @@ const Home = () => {
   useEffect(() => {
     fetchAllGenerations();
   }, []);
-
-  console.log(pokemon);
 
   return (
     <div>

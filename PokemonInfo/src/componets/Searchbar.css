@@ -1,17 +1,25 @@
 #searchbar {
-  margin-top: 10rem;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
 input {
-  width: 33%;
+  width: 55%;
   height: 2rem;
 }
 
 button {
-  height: 2.35rem;
+  margin-top: 2rem;
+  height: 2.5rem;
+  width: 5rem;
 }
 
 input[type="text"] {
     font-size:18px;
+}
+
+.pokeball {
+  height: 35px;
+  width: 35px;
 }
